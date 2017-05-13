@@ -1,5 +1,5 @@
 class Api::V1::BaseController < ApplicationController
-  attr_accessor :current_user  
+  attr_accessor :current_user
   # disable the CSRF token
   protect_from_forgery with: :null_session
 
@@ -25,4 +25,12 @@ class Api::V1::BaseController < ApplicationController
       return unauthenticated!
     end
   end
+
+  def unauthenticated!
+    api_error(status: 401)
+  end
+
+  def api_error(opts = {})
+    render nothing: true, status: opts[:status]
+  end  
 end
