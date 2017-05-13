@@ -13,6 +13,10 @@ class MeetupsController < ApplicationController
     redirect_to meetups_path
   end
 
+  def show
+    @meetup = Meetup.find(params[:id])
+  end
+  
   private
 
   def meetup_params
